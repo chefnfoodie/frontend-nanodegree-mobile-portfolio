@@ -16,7 +16,9 @@ File: mover.css
 * Added will-change: transform, translate :transform to reduce layout time.
 
 File: main.js
-* Reduced pizza count from 200 to 20 since only handful is needed
+* Replaced querySelectorAll, querySelector method calls with getElementsById and getElementByClassName respectively
+* Reduced pizza count from 200 to 20 since only lesser number is needed.
+* Update for-loop where pizza are appended - moved getting randomPizzas element by id outside the loop
 * Added pizzaelements array to hold pizza elements. This eliminates the need to search the DOM again
 * Inside updatePositions method, moved the computation of (document.body.scrollTop / 1250); outside the loop to reduce repeated computation
 * Updated updatePositions method loop iteration to use pizzaelements array'

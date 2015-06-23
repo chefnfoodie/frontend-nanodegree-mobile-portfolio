@@ -478,8 +478,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -508,7 +508,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
-  window.requestAnimationFrame(updatePositions);
   frame++;
   window.performance.mark("mark_start_frame");
 
@@ -524,7 +523,6 @@ function updatePositions() {
       // reset to 0 for next cycle
       ctr = 0;
     }
-
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -535,7 +533,7 @@ function updatePositions() {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
-
+  window.requestAnimationFrame(updatePositions);
 }
 
 // runs updatePositions on scroll
