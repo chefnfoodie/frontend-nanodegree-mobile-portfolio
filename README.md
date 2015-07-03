@@ -32,6 +32,19 @@ File: main.js
 * Phase and elem variables have been declared outside the loops and phase has been modified to include'*100'.
 * Strict mode has been enabled for some functions.
 
+** how to run
+To inspect the site on your phone, you can run a local server
+
+$> cd /path/to/your-project-folder
+$> python -m SimpleHTTPServer 8080
+
+Open a browser and visit localhost:8080
+
+Download and install ngrok to make your local server accessible remotely.
+
+$> cd /path/to/your-project-folder
+$> ngrok 8080
+
 ### References
 1) http://cssminifier.com/ - Used in the project to minify CSS file
 
