@@ -32,7 +32,8 @@ File: main.js
 * Phase and elem variables have been declared outside the loops and phase has been modified to include'*100'.
 * Strict mode has been enabled for some functions.
 
-** how to run
+
+####Part 3: Instructions to run
 To inspect the site on your phone, you can run a local server
 
 $> cd /path/to/your-project-folder
