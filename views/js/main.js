@@ -334,6 +334,7 @@ var ingredientItemizer = function(string) {
 
 // Returns a string with random pizza ingredients nested inside <li> tags
 var makeRandomPizza = function() {
+  "use strict";
   var pizza = "";
 
   var numberOfMeats = Math.floor((Math.random() * 4));
@@ -424,7 +425,7 @@ var resizePizzas = function(size) {
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
-    var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
+    var windowwidth = document.getElementById("randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
 
     // TODO: change to 3 sizes? no more xl?
@@ -457,11 +458,15 @@ var resizePizzas = function(size) {
       case "2":
       newwidth = 33.3;
       break;
+      case "3":
+      newwidth = 50;
+      break;
       default:
       console.log("bug");
     }
     var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
-    for (var i = 0; i < randomPizzas.length; i++) {
+    var pizzaLen = randomPizzas.length;
+    for (var i = 0; i < pizzaLen; i++) {
       randomPizzas[i].style.width = newwidth + "%";
     }
   }
@@ -508,21 +513,21 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
+  "use strict";
   frame++;
   window.performance.mark("mark_start_frame");
 
   var val = (document.body.scrollTop / 1250);
   // counter initialized to 0
-  var ctr = 0;
 
-  for (var i = 0; i < pizzaelements.length; i++) {
-    var phase = Math.sin( val + ctr);
-    pizzaelements[i].style.left = pizzaelements[i].basicLeft + 100 * phase + 'px';
-    ctr++;
-    if (ctr === 5) {
-      // reset to 0 for next cycle
-      ctr = 0;
-    }
+
+
+  var elementLength = pizzaelements.length;
+  var phase;
+
+  for (var i = 0; i < elementLength; i++) {
+    phase = Math.sin( val + i % 5) * 100;
+    pizzaelements[i].style.left = pizzaelements[i].basicLeft + phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -547,17 +552,21 @@ var pizzaelements = [];
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  // reduce the pizza count from 200 to 20
-  for (var i = 0; i < 20; i++) {
-    var elem = document.createElement('img');
+  // generate pizzas to fill the screen within window height
+  var row = window.innerHeight;
+  var elemCount = (row/s) * cols;
+  var elem;
+  for (var i = 0; i < elemCount; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
-    //elem.style.left = (i % cols) * s + 'px';
+    elem.style.left = (i % cols) * s + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     pizzaelements.push(elem);
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
+ // updatePositions();
 });

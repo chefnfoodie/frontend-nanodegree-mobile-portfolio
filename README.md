@@ -25,6 +25,12 @@ File: main.js
 * Inside updatePositions method, removed mod operation with counter logic
 * Replaced window.addEventListener('scroll', updatePositions); with window.requestAnimationFrame(updatePositions); and added window.requestAnimationFrame(updatePositions); 
 * Refined changePizzaSizes method to improve the performance
+* Compressed images for index.html.
+* Added code to generate pizzas to fill the screen within window height.
+* Included case 3 with new width: 50 in changePizzaSizes function.
+* Array length has been specified outside the for loop for optimization.
+* Phase and elem variables have been declared outside the loops and phase has been modified to include'*100'.
+* Strict mode has been enabled for some functions.
 
 ### References
 1) http://cssminifier.com/ - Used in the project to minify CSS file
