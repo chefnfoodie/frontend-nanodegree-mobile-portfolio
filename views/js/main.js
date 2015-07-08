@@ -553,7 +553,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   // generate pizzas to fill the screen within window height
-  var row = window.innerHeight;
+  var row = window.screen.height;
   var elemCount = (row/s) * cols;
   var elem;
   for (var i = 0; i < elemCount; i++) {
